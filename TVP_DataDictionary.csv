@@ -1,0 +1,196 @@
+﻿VARIABLE,CATEGORY,TABLE,ABBREV,TYPE,DESCRIPTION
+Case#,Basic,Full,B,Factor,Identifier
+ShooterLastName,Basic,Full,B,Chr,
+ShooterFirstName,Basic,Full,B,Chr,
+FullDate,Date,Full,D,Factor,
+FullDateformat,Date,Full,D,Date,
+DayofWeek,Date,Full,D,Factor,
+Day,Date,Full,D,Factor,
+Month,Date,Full,D,Factor,
+Year,Date,Full,D,Int,
+StreetNumber,Location,Full,L,Chr,
+StreetName,Location,Full,L,Chr,
+City,Location,Full,L,Chr,
+State,Location,Full,L,Factor,Two-Letter State abbreviation
+County,Location,Full,L,Chr,
+ZipCode,Location,Full,L,Chr,
+Latitude,Location,Full,L,dbl,For Geocoding
+Longitude,Location,Full,L,dbl,For Geocoding
+StateCode,Location,Full,L,Factor,Alphabetical
+Region,Location,Full,L,Factor,
+Urban_Suburban_Rural,Location,Full,L,Factor,Based on population density and distance from a city center
+Metro_MicroStatisticalAreaType,Location,Full,L,Factor,Based on US Census classification
+Location,Location,Full,L,Factor,Where the shooting occurred
+InsiderorOutsider,Location,Full,L,Factor,Shooter had an existing relationship with the shooting site
+WorkplaceShooting,Location,Full,L,Factor,Shooter was a current or former employee
+MultipleLocations,Location,Full,L,Factor,Shots fired at more than one location
+OtherLocation,Location,Full,L,Chr,Where the shooting occurred
+ArmedPersononScene,Location,Full,L,Factor,Individual with a firearm in the immediate area or in the building when the shooting starts
+SpecifyArmedPerson,Location,Full,L,Chr,
+NumberKilled,Victims,Full,V,Int,
+NumberInjured,Victims,Full,V,Int,
+FamilyMemberVictim,Victims,Full,V,Factor,
+RomanticPartnerVictim,Victims,Full,V,Factor,
+KidnappingorHostageSituation,Victims,Full,V,Factor,
+Age,Offender Background,Full,OB,Int,
+Gender,Offender Background,Full,OB,Factor,Height in inches
+Race,Offender Background,Full,OB,Factor,Weight in lbs.
+Height,Offender Background,Full,OB,Int,
+Weight,Offender Background,Full,OB,Int,
+Immigrant,Offender Background,Full,OB,Factor,
+SexualOrientation,Offender Background,Full,OB,Factor,
+Religion,Offender Background,Full,OB,Factor,
+Education,Offender Background,Full,OB,Factor,
+SchoolPerformance,Offender Background,Full,OB,Factor,
+SchoolPerformanceSpecified,Offender Background,Full,OB,Chr,
+BirthOrder,Offender Background,Full,OB,Factor,
+NumberofSiblings,Offender Background,Full,OB,Int,
+OlderSiblings,Offender Background,Full,OB,Int,
+YoungerSiblings,Offender Background,Full,OB,Int,Shooter was a parent
+RelationshipStatus,Offender Background,Full,OB,Factor,
+Children,Offender Background,Full,OB,Int,Based on most recent employment
+EmploymentStatus,Offender Background,Full,OB,Factor,
+EmploymentType ,Offender Background,Full,OB,Factor,
+MilitaryService,Offender Background,Full,OB,Factor,Participation in civic life and membership in local clubs and organizations
+MilitaryBranch,Offender Background,Full,OB,Factor,
+CommunityInvolvement,Offender Background,Full,OB,Factor,
+CommunityInvolvementSpecified,Offender Background,Full,OB,Chr,
+KnowntoPoliceorFBI,Crime and Violence,Full,CV,Factor,
+CriminalRecord,Crime and Violence,Full,CV,Factor,
+PartICrimes,Crime and Violence,Full,CV,Factor,
+PartIICrimes,Crime and Violence,Full,CV,Factor,
+HighestLevelofJusticeSystemInvolvement,Crime and Violence,Full,CV,Factor,Getting into physical fights with people
+HistoryofPhysicalAltercations,Crime and Violence,Full,CV,Factor,Physical and non-physical forms of abuse
+HistoryofAnimalAbuse,Crime and Violence,Full,CV,Factor,
+HistoryofDomesticAbuse,Crime and Violence,Full,CV,Factor,"History of rape, molestation, indecent exposure, child pornography, sexual harassment, or other acts with a sexual motivation"
+DomesticAbuseSpecified,Crime and Violence,Full,CV,Factor,
+HistoryofSexualOffenses,Crime and Violence,Full,CV,Factor,
+GangAffiliation,Crime and Violence,Full,CV,Factor,
+TerrorGroupAffiliation,Crime and Violence,Full,CV,Factor,Graphic first-person shooter games
+KnownHateGrouporChatRoomAffiliation,Crime and Violence,Full,CV,Factor,
+ViolentVideoGames,Crime and Violence,Full,CV,Factor,
+Bully,Crime and Violence,Full,CV,Factor,
+Bullied,Trauma and adverse childhood experiences,Full,TACE,Factor,
+RaisedbySingleParent,Trauma and adverse childhood experiences,Full,TACE,Factor,
+ParentalDivorce_Separation,Trauma and adverse childhood experiences,Full,TACE,Factor,
+ParentalDeathinChildhood,Trauma and adverse childhood experiences,Full,TACE,Factor,
+ParentalSuicide,Trauma and adverse childhood experiences,Full,TACE,Factor,Shooter experienced during childhood
+ChildhoodTrauma,Trauma and adverse childhood experiences,Full,TACE,Factor,Shooter experienced during childhood
+PhysicallyAbused,Trauma and adverse childhood experiences,Full,TACE,Factor,Shooter experienced during childhood
+SexuallyAbused,Trauma and adverse childhood experiences,Full,TACE,Factor,Shooter experienced during childhood
+EmotionallyAbused,Trauma and adverse childhood experiences,Full,TACE,Factor,Estimated using all public data
+Neglected,Trauma and adverse childhood experiences,Full,TACE,Factor,
+ChildhoodSES,Trauma and adverse childhood experiences,Full,TACE,Factor,Drug or alcohol abuse
+MotherViolentTreatment,Trauma and adverse childhood experiences,Full,TACE,Factor,"Arrest, conviction, or restraining order"
+ParentalSubstanceAbuse,Trauma and adverse childhood experiences,Full,TACE,Factor,
+ParentCriminalRecord,Trauma and adverse childhood experiences,Full,TACE,Factor,
+FamilyMemberIncarcerated,Trauma and adverse childhood experiences,Full,TACE,Factor,
+AdultTrauma,Trauma and adverse childhood experiences,Full,TACE,Factor,Current circumstances overwhelming coping mechanisms causing a marked change in behavior from baseline
+RecentorOngoingStressor,Signs of a crisis,Full,SC,Factor,
+SignsofBeinginCrisis,Signs of a crisis,Full,SC,Chr,Marked change in this behavior from their baseline
+TimelineofSignsofCrisis,Signs of a crisis,Full,SC,Factor,Marked change in this behavior from their baseline
+SignsofCrisisExpanded,Signs of a crisis,Full,SC,Factor,Marked change in this behavior from their baseline
+InabilitytoPerformDailyTasks,Signs of a crisis,Full,SC,Factor,Marked change in this behavior from their baseline
+NotablyDepressedMood,Signs of a crisis,Full,SC,Factor,Marked change in this behavior from their baseline
+UnusuallyCalmorHappy,Signs of a crisis,Full,SC,Factor,Marked change in this behavior from their baseline
+RapidMoodSwings,Signs of a crisis,Full,SC,Factor,Marked change in this behavior from their baseline
+IncreasedAgitation,Signs of a crisis,Full,SC,Factor,Marked change in this behavior from their baseline
+AbusiveBehavior,Signs of a crisis,Full,SC,Factor,Marked change in this behavior from their baseline
+Isolation,Signs of a crisis,Full,SC,Factor,
+LosingTouchwithReality,Signs of a crisis,Full,SC,Factor,
+Paranoia,Signs of a crisis,Full,SC,Factor,
+Suicidality,Health and mental health,Full,HMH,Factor,
+PriorHospitalization,Health and mental health,Full,HMH,Factor,
+VoluntaryorInvoluntaryHospitalization,Health and mental health,Full,HMH,Factor,
+PriorCounseling,Health and mental health,Full,HMH,Factor,
+VoluntaryorMandatoryCounseling,Health and mental health,Full,HMH,Factor,"Counseling, medication, hospital treatment in the six months prior to shooting"
+PsychiatricMedication,Health and mental health,Full,HMH,Factor,
+PsychiatricMedicationSpecified,Health and mental health,Full,HMH,Factor,
+MedicationCategory,Health and mental health,F,HMH,Factor,
+Treatment6MonthsPriortoShooting,Health and mental health,Full,HMH,Factor,
+MentalIllness,Health and mental health,Full,HMH,Factor,
+FASD(FetalAlcoholSpectrumDisorder),Health and mental health,Full,HMH,Factor,
+KnownFamilyMentalHealthHistory,Health and mental health,Full,HMH,Factor,
+AutismSpectrum,Health and mental health,Full,HMH,Factor,
+SubstanceUse,Health and mental health,Full,HMH,Factor,Not primary motive
+HealthIssues,Health and mental health,Full,HMH,Factor,
+HealthIssues-Specify,Health and mental health,Full,HMH,Factor,
+HeadInjury_PossibleTBI,Health and mental health,Full,HMH,Factor,
+KnownPrejudices ,Grievance and motivation,Full,GM,Factor,
+Motive_Racism_Xenophobia,Grievance and motivation,Full,GM,Factor,"E.g. Fired, lost promotion"
+Motive_ReligiousHate,Grievance and motivation,Full,GM,Factor,"E.g. Debt, gambling"
+Motive_Misogyny,Grievance and motivation,Full,GM,Factor,
+Motive_Homophobia,Grievance and motivation,Full,GM,Factor,"E.g. Breakup, separation"
+Motive_EmploymentIssue,Grievance and motivation,Full,GM,Factor,"Non-domestic issue with family, co-workers, friends"
+Motive_EconomicIssue,Grievance and motivation,Full,GM,Factor,
+Motive_LegalIssue,Grievance and motivation,Full,GM,Factor,
+Motive_RelationshipIssue,Grievance and motivation,Full,GM,Factor,
+Motive_InterpersonalConflict ,Grievance and motivation,Full,GM,Factor,"Perpetrator experienced delusions and/or hallucinations while planning and/or committing the shooting, was responding to delusions and/or hallucinations while planning and/or committing the shooting"
+Motive_Fame-Seeking,Grievance and motivation,Full,GM,Factor,
+Motive_Other ,Grievance and motivation,Full,GM,Factor,Communication to a third party of an intent to do harm
+Motive_Unknown,Grievance and motivation,Full,GM,Factor,
+RoleofPsychosisintheShooting,Grievance and motivation,Full,GM,Factor,
+SocialMediaUse ,Social contagion,Full,SOC,Factor,
+Leakage ,Social contagion,Full,SOC,Factor,
+LeakageHow,Social contagion,Full,SOC,Factor,
+LeakageWho ,Social contagion,Full,SOC,Factor,
+LeakageSpecific_Nonspecific ,Social contagion,Full,SOC,Factor,Left something behind
+InterestinPastMassViolence,Social contagion,Full,SOC,Factor,
+RelationshipwithOtherShooting(s),Social contagion,Full,SOC,Factor,
+SpecifyRelationshiptoOtherShooting(s),Social contagion,Full,SOC,Chr,
+LegacyToken,Social contagion,Full,SOC,Factor,"E.g. Filmed, costume"
+PopCultureConnection,Social contagion,Full,SOC,Factor,
+SpecifyPopCultureConnection,Social contagion,Full,SOC,Chr,
+Planning,Social contagion,Full,SOC,Factor,
+Performance,Social contagion,Full,SOC,Factor,
+InterestinFirearms,Weapons,Full,W,Factor,
+FirearmProficiency,Weapons,Full,W,Factor,
+TotalFirearmsBroughttotheScene,Weapons,Full,W,Factor,
+OtherWeaponsorGear,Weapons,Full,W,Factor,
+SpecifyOtherWeaponsorGear,Weapons,Full,W,Chr,If used at any point in the trial
+On-SceneOutcome,Resolution of case,Full,RC,Factor,
+WhoKilledShooterOnScene,Resolution of case,Full,RC,Factor,
+AttempttoFlee,Resolution of case,Full,RC,Factor,"A handgun has a short barrel; a shotgun has a long barrel and usually has a smooth bore; a rifle has a long barrel with rifling, which puts spin on the bullet, increasing accuracy and distance; an assault weapon is any semi-automatic gun that can accept a detachable ammunition magazine that has one or more additional features considered useful in military and criminal applications but unnecessary for sports or self-defense, such as a folding, telescoping or thumbhole rifle stock. This is consistent with the Federal Assault Weapons Ban of 1994."
+InsanityDefense,Resolution of case,Full,RC,Factor,
+CriminalSentence,Resolution of case,Full,RC,Factor,
+Makeandmodel,Firearms,Firearms,F,Chr,
+Classification,Firearms,Firearms,F,Factor,Magazine held more than 10 bullets
+Caliber,Firearms,Firearms,F,Factor,Magazine was larger than standard issue for the weapon
+Firearmusedinshooting,Firearms,Firearms,F,Factor,
+Modified,Firearms,Firearms,F,Factor,Based on state and federal law at time of shooting
+LargeCapacityMagazine,Firearms,Firearms,F,Factor,Based on state and federal law at time of shooting
+Extendedmagazine,Firearms,Firearms,F,Factor,
+Whenobtained,Firearms,Firearms,F,Factor,
+Legalpurchase,Firearms,Firearms,F,Factor,
+Illegalpurchase,Firearms,Firearms,F,Factor,
+Assembledwithlegalparts,Firearms,Firearms,F,Factor,
+Gifted,Firearms,Firearms,F,Factor,
+Theft,Firearms,Firearms,F,Factor,
+Unknown,Firearms,Firearms,F,Factor,
+Age,Victims,Victims,V,Int,
+Gender,Victims,Victims,V,Factor,
+Race,Victims,Victims,V,Factor,Life expectancy based on birth year and demographics using CDC data
+KnewPerpetrator,Victims,Victims,V,Factor,Life expectancy minus age at death
+"Ifknown,relationshipwithperpetrator",Victims,Victims,V,Chr,
+Relationshipwithperpetrator,Victims,Victims,V,Factor,
+Lifeexpectancy,Victims,Victims,V,Int,
+YearsLost,Victims,Victims,V,Int,
+Location,Community,Community,COMM,Factor,
+ShootingStartTime,Community,Community,COMM,DateTime,
+ShootingEndTime,Community,Community,COMM,DateTime,
+TimeofDay(StartTime),Community,Community,COMM,Factor,
+ZipCode,Community,Community,COMM,Chr,
+TotalPopulation(U.S.Census),Community,Community,COMM,Int,
+MedianAge,Community,Community,COMM,Int,
+%WhiteAlone,Community,Community,COMM,dbl,
+%FemaleHousehold,Community,Community,COMM,dbl,
+%RentalUnits,Community,Community,COMM,dbl,
+%Employed,Community,Community,COMM,dbl,
+%HighSchoolGraduate,Community,Community,COMM,dbl,
+%CollegeGraduate,Community,Community,COMM,dbl,
+%WithoutHealthInsurance,Community,Community,COMM,dbl,
+NearestHospital(inMiles),Community,Community,COMM,Int,
+NMentalHealthProvidersinZipCode,Community,Community,COMM,Int,
+NGunStoresinZipCode,Community,Community,COMM,Int,
+SizeofPoliceDepartment,Community,Community,COMM,Int,
+HomicideRate(FBIUCR),Community,Community,COMM,dbl,
