@@ -6,7 +6,7 @@ editor: visual
 
 # Business Problem
 
-We will work with The Violence Project's Mass Shooter Database and the purpose of this project is to better understand the underlying factors, patterns, and consequences associated with public mass shootings, which could aid in the development of preventive strategies, interventions, and support for survivors.  The data will be examined at three levels: the perpetrator, the victims, and the locations or communities.  The desired outcomes will be models of typologies of each of these levels that could be used to generate new research questions, risk assessment models, prevention interventions, and trauma interventions for survivors and witnesses.   
+We will work with The Violence Project's Mass Shooter Database to better understand the underlying factors, patterns, and consequences associated with public mass shootings. This could aid in the development of preventive strategies, interventions, and support for survivors.  The data will be examined at three levels: the perpetrator, the victims, and the locations or communities.  The desired outcomes will be models of typologies of each of these levels that could be used to generate new research questions, risk assessment models, prevention interventions, and trauma interventions for survivors and witnesses.   
 
 **Methods**
 
@@ -20,24 +20,20 @@ The Full Database worksheet was extracted from the Excel file and saved as a sep
 
 -   Replaced "Case \#" header with "CaseNum" - this makes things easier for matching and referencing the case numbers.
 
-```{=html}
 <!-- -->
-```
+
 -   Removed non-standard text from field names, including spaces, dashes, slashes, and parentheses. For some, I replaced with underscores, but not for spaces.
 
-```{=html}
 <!-- -->
-```
--   Made the Zipcode field text and added a leading zero to those that needed it (Excel converted these to integers). 	 	
 
-```{=html}
+-   Made the Zipcode field text and added a leading zero to those that needed it (Excel converted these to integers).
+
 <!-- -->
-```
+
 -   Reconciled inconsistent single- and double-quotes in the long-text fields. These were causing the data to be shifted to a new row.
 
-```{=html}
 <!-- -->
-```
+
 -   Replaced case \# "145,146" with two rows for each case: 145, 146, duplicating the data. These apparently were one event but two shooters. But there isn't much data about them, so we'll probably drop these cases, anyhow. But at least this way, the file is readable.
 
 To help with the analysis, the field names were modified to include an abbreviation of the category of the variable (based on the codebook) as a prefix. For example, "Age" was changed to "OB_Age", with "OB" abbreviation of "Offender Background" category. Linking these field names to the codebook will also help with identifying factors and other data management tasks. In order to avoid confusion, this version was saved as a separate CSV file, Full_database_VarCatHeaders.csv.
