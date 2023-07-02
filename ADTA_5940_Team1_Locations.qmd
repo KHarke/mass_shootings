@@ -1,5 +1,5 @@
 ---
-title:  "Data Science Project using R Studio"
+title:  "Cluster Analysis of Mass Shooting Locations"
 author: "Tochi Agbara, Karen Harker, Kevin Brown"
 editor: visual
 ---
@@ -10,11 +10,37 @@ We will work with The Violence Project's Mass Shooter Database and the purpose o
 
 **Methods**
 
-We would typically use machine learning algorithms, such as classification models, or bootstrapping to build more data resample with replacement. These will help to build a predictive model for identifying individuals at risk of perpetrating shooting incidents. We could also do a correlation test of mass shooters in Texas to ascertain the gun control level. We are focusing on using unsupervised learning by clustering analysis using age, criminal background, ethnicity, education, etc. to help the policymakers to minimize casualties. Finally, suggestions for future research on the relationship between homicide and the Internet will be considered (Patricia, 2021). 
+We would typically use machine learning algorithms, such as classification models, or bootstrapping to build more data resample with replacement. These will help to build a predictive model for identifying individuals at risk of perpetrating shooting incidents or being victims, or locations at risk. We could also do a correlation test of mass shooters in Texas to ascertain the gun control level. We are focusing on using unsupervised learning by clustering analysis using age, criminal background, ethnicity, education, etc. to help the policymakers to minimize casualties. Finally, suggestions for future research on the relationship between homicide and the Internet will be considered (Patricia, 2021). 
 
 ## Read the data / Import the Data
 
-We import the Full Database sheet and the historical state population by year then converted to csv...
+The Violence Project, a non-profit, nonpartisan research organization dedicated to ... , maintains the Mass Shooter Database (MSDB) (<https://www.theviolenceproject.org/mass-shooter-database/>). The full dataset is available upon request and is provided in an Excel workbook of multiple worksheets, including a codebook or data dictionary. The unit of analysis of the data is the individual mass shooter identified by a case number. There are sheets that contain data about individual victims, the weapons used in each shooting or brought to the scene, about the community at or near the time of the event, and national-level population trend data. The "Full Database" sheet summarizes these data at the shooter level, making it the prime source to use, at least initially.
+
+The Full Database worksheet was extracted from the Excel file and saved as a separate CSV file. There were textual inconsistencies within the database as originally provided, making it difficult to run certain functions. Some modifications were made using Excel, including:
+
+-   Replaced "Case \#" header with "CaseNum" - this makes things easier for matching and referencing the case numbers.
+
+```{=html}
+<!-- -->
+```
+-   Removed non-standard text from field names, including spaces, dashes, slashes, and parentheses. For some, I replaced with underscores, but not for spaces.
+
+```{=html}
+<!-- -->
+```
+-   Made the Zipcode field text and added a leading zero to those that needed it (Excel converted these to integers). 	 	
+
+```{=html}
+<!-- -->
+```
+-   Reconciled inconsistent single- and double-quotes in the long-text fields. These were causing the data to be shifted to a new row.
+
+```{=html}
+<!-- -->
+```
+-   Replaced case \# "145,146" with two rows for each case: 145, 146, duplicating the data. These apparently were one event but two shooters. But there isn't much data about them, so we'll probably drop these cases, anyhow. But at least this way, the file is readable.
+
+To help with the analysis, the field names were modified to include an abbreviation of the category of the variable (based on the codebook) as a prefix. For example, "Age" was changed to "OB_Age", with "OB" abbreviation of "Offender Background" category. Linking these field names to the codebook will also help with identifying factors and other data management tasks. In order to avoid confusion, this version was saved as a separate CSV file, Full_database_VarCatHeaders.csv.
 
 ```{r, echo=TRUE}
 library(readr)
@@ -27,17 +53,13 @@ library(tidyverse)
 library(GGally)
 
 Full_Database<-read.csv("Full_database_VarCatHeaders.csv", header=TRUE)
-historical_state_population_by_year<-read.csv("historical_state_population_by_year.csv", header=TRUE)
 
-# KH: read the State Firearms Law table that provides sums of restrictive gun laws for that state in the year of that event.
-sfl_sum <- read.csv("SFL_Sum_Year_by_MSDB_Case.csv", header=TRUE)
 
 Full_Database
-historical_state_population_by_year
-sfl_sum
+
 ```
 
-```{}
+```         
 ```
 
 ## Clean the Data
@@ -196,7 +218,10 @@ We want to join the data on state and year to gain insights into state populatio
 Both of these data will be merged with the Full_Dataset based on both State and Year. NOTE: the State Firearms Law Database has already been matched against the state and year prior to being added to this R Project. Hence, this extracted dataset will be matched based on the case number.EDA
 
 ```{r}
+historical_state_population_by_year<-read.csv("historical_state_population_by_year.csv", header=TRUE)
 
+# KH: read the State Firearms Law table that provides sums of restrictive gun laws for that state in the year of that event.
+sfl_sum <- read.csv("SFL_Sum_Year_by_MSDB_Case.csv", header=TRUE)
 
 # Merge data and keep all rows from Full_Database
 location_df <- location_df %>%
