@@ -1,0 +1,238 @@
+---
+title:  "Data Science Project using R Studio"
+author: "Tochi Agbara, Karen Harker, Kevin Brown"
+editor: visual
+---
+
+# Business Problem
+
+We will work with The Violence Project's Mass Shooter Database and the purpose of this project is to better understand the underlying factors, patterns, and consequences associated with public mass shootings, which could aid in the development of preventive strategies, interventions, and support for survivors.  The data will be examined at three levels: the perpetrator, the victims, and the locations or communities.  The desired outcomes will be models of typologies of each of these levels that could be used to generate new research questions, risk assessment models, prevention interventions, and trauma interventions for survivors and witnesses.   
+
+**Methods**
+
+We would typically use machine learning algorithms, such as classification models, or bootstrapping to build more data resample with replacement. These will help to build a predictive model for identifying individuals at risk of perpetrating shooting incidents. We could also do a correlation test of mass shooters in Texas to ascertain the gun control level. We are focusing on using unsupervised learning by clustering analysis using age, criminal background, ethnicity, education, etc. to help the policymakers to minimize casualties. Finally, suggestions for future research on the relationship between homicide and the Internet will be considered (Patricia, 2021). 
+
+## Read the data / Import the Data
+
+We import the Full Database sheet and the historical state population by year then converted to csv...
+
+```{r, echo=TRUE}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(corrplot)
+library(lubridate)
+library(tidyr)
+library(tidyverse)
+library(GGally)
+
+Full_Database<-read.csv("Full_database_VarCatHeaders.csv", header=TRUE)
+historical_state_population_by_year<-read.csv("historical_state_population_by_year.csv", header=TRUE)
+
+# KH: read the State Firearms Law table that provides sums of restrictive gun laws for that state in the year of that event.
+sfl_sum <- read.csv("SFL_Sum_Year_by_MSDB_Case.csv", header=TRUE)
+
+Full_Database
+historical_state_population_by_year
+sfl_sum
+```
+
+```{}
+```
+
+## Clean the Data
+
+The fields are prefixed by a category label, derived from the codebook:
+
+```{r}
+
+tvp_dd<-read.csv("TVP_DataDictionary.csv")
+str(tvp_dd)
+
+tvp_dd$CAT_ABBREV<-paste(tvp_dd$ABBREV, tvp_dd$CATEGORY, sep="_")
+str(tvp_dd)
+
+tvp_dd %>%
+  group_by(CAT_ABBREV) %>%
+  summarize("Num_Vars"=n())
+
+head(tvp_dd)
+
+```
+
+### Convert Categoricals to Factors
+
+For any machine learning experiment, the categorical variables need to be converted to factors. The variables which be factors have already been identified manually based on the Codebook.
+
+```{r}
+# Which fields in the Full Database are factors?
+dd_factors<-subset(tvp_dd, TYPE=="Factor" & TABLE=="Full")
+#dd_factors
+factors_list<-dd_factors$VARIABLE
+
+Full_Database<-Full_Database %>%
+  mutate_at(factors_list, as.factor)
+str(Full_Database)
+```
+
+### Eliminating Unnecessary Features
+
+For the purposes of cluster analysis of location, many of the factors included in the Full_Database are not relevant. Whole categories we *excluded* include:
+
+-   TACE (Trauma, Abuse, and Childhood Experience)
+
+-   V (Victims)
+
+-   SC (Signs of Crisis)
+
+Whole categories of fields we *will* include:
+
+-   B (Basic)
+
+-   D (Date)
+
+-   L (Location)
+
+-   COMM (Community)
+
+-   F (Firearms)
+
+-   W (Weapons)
+
+-   GM (Grievance and Motivation) - association with regions or states
+
+Then there are selected variables from the remaining categories which *may* be relevant or useful in the modeling of locations:
+
+-   OB_Gender
+
+-   OB_Race
+
+-   OB_Age
+
+-   CV_CriminalRecord (when compared with state firearms laws)
+
+-   HMH_PriorHospitalization (again, for analysis against state firearms laws)
+
+-   SOC_Leakage
+
+-   RC_WhoKilledShooterOnScene - to be combined with L_ArmedPersonOnScene
+
+The remaining variables from these categories are not needed.
+
+```{r}
+location_df<-Full_Database %>%
+  select(starts_with("B_") |
+  starts_with("D_") | 
+  starts_with("L_") |
+  starts_with("W_") |
+  starts_with("COMM_") |
+  starts_with("F_") |
+  starts_with("GM_") |
+  starts_with("OB_Gender") |
+  starts_with("OB_Age") |
+  starts_with("OB_Race") |
+  starts_with("CV_CriminalRecord") |
+  starts_with("HMH_PriorHospitalization") |
+  starts_with("SOC_Leakage") |
+  starts_with("RC_WhoKilledShooterOnScene"))
+
+
+head(location_df)
+```
+
+### Evaluating missing values
+
+Then I'm going to find the features with the fewest missing variables. I'm going to try the *vis_miss()* function of the **visdat** library.
+
+```{r}
+library(visdat)
+location_df[] <- lapply(location_df, function(x) {
+    is.na(levels(x)) <- levels(x) == "NA"
+    x
+})
+
+vis_miss(location_df)
+```
+
+It looks like there are only a few fields for which there are substantially missing data, but it's hard to read the column names. Better to examine the distribution of usage by variable.
+
+```{r}
+
+library(tidyverse)
+# solution found https://stackoverflow.com/questions/44485428/store-output-of-sapply-into-a-data-frame
+
+#count the number missing
+location_df_missing<-data.frame(sapply(location_df, function(x) sum(is.na(x))))
+
+#bind to 
+location_df_missing<- cbind(variable = row.names(location_df_missing), location_df_missing)
+
+location_df_missing<-location_df_missing %>% 
+  rename(num_missing=sapply.location_df..function.x..sum.is.na.x...)
+location_df_missing<-location_df_missing %>% 
+  mutate(location_df_missing, pct_missing = as.numeric(location_df_missing$num_missing)/ as.numeric(195))
+location_df_missing<-location_df_missing[order(-location_df_missing$num_missing), ]
+location_df_missing
+barplot(t(as.matrix(location_df_missing$pct_missing)), beside=TRUE)
+```
+
+Based on the table of missing data, the fields with significant amounts of missing data are essentially the long-text fields, which I'm not going to be using anyhow. So, I'll just remove them from the dataframe.
+
+```{r}
+location_df<-location_df %>%
+  select(-starts_with("L_Other")) %>%
+  select(-starts_with("W_SpecifyOther")) %>%
+  select(-starts_with("SOC_LeakageHow")) %>%
+  select(-starts_with("SOC_LeakageWho")) %>%
+  select(-starts_with("SOC_LeakageSpec"))
+head(location_df)
+vis_miss(location_df)
+```
+
+## Join / Merge the data
+
+We want to join the data on state and year to gain insights into state population and the state firearms laws in a given time period. The population estimates were downloaded from <https://github.com/JoshData/historical-state-population-csv>, which were originally from the U.S. Census. The firearms laws data was extracted from the [State Firearms Law Database](https://www.statefirearmlaws.org/resources), originally created for a research project. The key data point extracted from this set is the total number of *restrictive* firearms laws for the state and effective year of the mass shooting event. The main limitation of this data is that it only covers the period from 1991 through 2021.
+
+Both of these data will be merged with the Full_Dataset based on both State and Year. NOTE: the State Firearms Law Database has already been matched against the state and year prior to being added to this R Project. Hence, this extracted dataset will be matched based on the case number.EDA
+
+```{r}
+
+
+# Merge data and keep all rows from Full_Database
+location_df <- location_df %>%
+    left_join(historical_state_population_by_year, by=c("L_State" = "PopulationState", "D_Year" = "StatePopulationYear"))
+
+# KH: joined with the SFL dataset, adding SLF_Sum_Year column
+location_df <- location_df %>%
+   left_join(sfl_sum, by="B_CaseNum")
+
+location_df
+```
+
+## Statistical Analysis
+
+```{r}
+
+```
+
+## Data Modeling
+
+```{r}
+
+```
+
+## Cluster Analysis
+
+```{r}
+
+```
+
+## Boot strapping
+
+```{r}
+
+```
+
+## Data Reporting & Communication Results
+
+## 
