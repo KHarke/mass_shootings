@@ -1,5 +1,5 @@
 ﻿VARIABLE_ORIG,VARIABLE,CATEGORY,TABLE,ABBREV,TYPE,DESCRIPTION
-CaseNum,B_CaseNum,Basic,Full,B,Factor,Identifier
+CaseNum,B_CaseNum,Basic,Full,B,Int,Identifier
 ShooterLastName,B_ShooterLastName,Basic,Full,B,Chr,
 ShooterFirstName,B_ShooterFirstName,Basic,Full,B,Chr,
 FullDate,D_FullDate,Date,Full,D,Factor,
