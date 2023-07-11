@@ -392,11 +392,11 @@
 66,Beck,Matthew,3/6/1998,Michael T. Logan,33,0,0,1,supervisor,3,68,35
 66,Beck,Matthew,3/6/1998,Linda A. Blogoslawski Mlynarczyk,38,1,0,1,supervisor,3,74.1,36.1
 66,Beck,Matthew,3/6/1998,Frederick W. Rubelmann III,40,0,0,1,supervisor,3,67.4,27.4
-"67, 68","Golden, Johnson","Andrew, Mitchell",3/24/1998,Natalie Brooks,11,1,0,1,classmate,4,79.4,68.4
-"67, 68","Golden, Johnson","Andrew, Mitchell",3/24/1998,Paige Ann Herring,12,1,0,1,classmate,4,79.4,67.4
-"67, 68","Golden, Johnson","Andrew, Mitchell",3/24/1998,Stephanie Johnson,12,1,0,1,classmate,4,79.4,67.4
-"67, 68","Golden, Johnson","Andrew, Mitchell",3/24/1998,Britthney Varner-Wilson,11,1,0,1,classmate,4,79.4,68.4
-"67, 68","Golden, Johnson","Andrew, Mitchell",3/24/1998,Shannon Wright,32,1,0,1,teacher,4,75.6,43.6
+67,"Golden, Johnson","Andrew, Mitchell",3/24/1998,Natalie Brooks,11,1,0,1,classmate,4,79.4,68.4
+67,"Golden, Johnson","Andrew, Mitchell",3/24/1998,Paige Ann Herring,12,1,0,1,classmate,4,79.4,67.4
+67,"Golden, Johnson","Andrew, Mitchell",3/24/1998,Stephanie Johnson,12,1,0,1,classmate,4,79.4,67.4
+67,"Golden, Johnson","Andrew, Mitchell",3/24/1998,Britthney Varner-Wilson,11,1,0,1,classmate,4,79.4,68.4
+67,"Golden, Johnson","Andrew, Mitchell",3/24/1998,Shannon Wright,32,1,0,1,teacher,4,75.6,43.6
 69,Kinkel,Kip,5/20/1998,Bill Kinkel,59,0,0,1,father,1,66.5,7.5
 69,Kinkel,Kip,5/20/1998,Faith Kinkel,57,1,0,1,mother,1,72.2,15.2
 69,Kinkel,Kip,5/20/1998,Mikael Nickolauson,17,0,0,1,classmate,4,70.7,53.7
@@ -405,19 +405,19 @@
 70,Miller,Shon,3/10/1999,Carla Miller,25,1,1,1,estranged wife,2,71.3,46.3
 70,Miller,Shon,3/10/1999,Shon Miller Jr.,2,0,1,1,son,1,65.2,63.2
 70,Miller,Shon,3/10/1999,Mildred Vessel,53,1,1,1,mother-in-law,1,62.9,9.9
-"71, 72","Klebold, Harris","Dylan, Eric",4/20/1999,Cassie Bernall,17,1,0,2,"classmate, possibly known",4,78.1,61.1
-"71, 72","Klebold, Harris","Dylan, Eric",4/20/1999,Steven Curnow,14,0,0,2,"classmate, possibly known",4,72.7,58.7
-"71, 72","Klebold, Harris","Dylan, Eric",4/20/1999,Corey DePooter,17,0,0,2,"classmate, possibly known",4,70.7,53.7
-"71, 72","Klebold, Harris","Dylan, Eric",4/20/1999,Kelly Fleming,16,1,0,2,"classmate, possibly known",4,78.1,62.1
-"71, 72","Klebold, Harris","Dylan, Eric",4/20/1999,Matthew Kechter,16,0,0,2,"classmate, possibly known",4,70.7,54.7
-"71, 72","Klebold, Harris","Dylan, Eric",4/20/1999,Daniel Mauser,15,0,0,2,"classmate, possibly known",4,70.7,55.7
-"71, 72","Klebold, Harris","Dylan, Eric",4/20/1999,Daniel Rohrbough,15,0,0,1,"classmate, definitely known",4,70.7,55.7
-"71, 72","Klebold, Harris","Dylan, Eric",4/20/1999,"William ""Dave"" Sanders",47,0,0,1,teacher,4,66.5,19.5
-"71, 72","Klebold, Harris","Dylan, Eric",4/20/1999,Rachel Scott,17,1,0,1,"classmate, definitely known",4,78.1,61.1
-"71, 72","Klebold, Harris","Dylan, Eric",4/20/1999,Isaiah Shoels,18,0,1,2,"classmate, possibly known",4,63.8,45.8
-"71, 72","Klebold, Harris","Dylan, Eric",4/20/1999,John Tomlin,16,0,0,2,"classmate, possibly known",4,70.7,54.7
-"71, 72","Klebold, Harris","Dylan, Eric",4/20/1999,Lauren Townsend,18,1,0,2,"classmate, possibly known",4,78.1,60.1
-"71, 72","Klebold, Harris","Dylan, Eric",4/20/1999,Kyle Velasquez,16,0,2,2,"classmate, possibly known",4,70,54
+71,"Klebold, Harris","Dylan, Eric",4/20/1999,Cassie Bernall,17,1,0,2,"classmate, possibly known",4,78.1,61.1
+71,"Klebold, Harris","Dylan, Eric",4/20/1999,Steven Curnow,14,0,0,2,"classmate, possibly known",4,72.7,58.7
+71,"Klebold, Harris","Dylan, Eric",4/20/1999,Corey DePooter,17,0,0,2,"classmate, possibly known",4,70.7,53.7
+71,"Klebold, Harris","Dylan, Eric",4/20/1999,Kelly Fleming,16,1,0,2,"classmate, possibly known",4,78.1,62.1
+71,"Klebold, Harris","Dylan, Eric",4/20/1999,Matthew Kechter,16,0,0,2,"classmate, possibly known",4,70.7,54.7
+71,"Klebold, Harris","Dylan, Eric",4/20/1999,Daniel Mauser,15,0,0,2,"classmate, possibly known",4,70.7,55.7
+71,"Klebold, Harris","Dylan, Eric",4/20/1999,Daniel Rohrbough,15,0,0,1,"classmate, definitely known",4,70.7,55.7
+71,"Klebold, Harris","Dylan, Eric",4/20/1999,"William ""Dave"" Sanders",47,0,0,1,teacher,4,66.5,19.5
+71,"Klebold, Harris","Dylan, Eric",4/20/1999,Rachel Scott,17,1,0,1,"classmate, definitely known",4,78.1,61.1
+71,"Klebold, Harris","Dylan, Eric",4/20/1999,Isaiah Shoels,18,0,1,2,"classmate, possibly known",4,63.8,45.8
+71,"Klebold, Harris","Dylan, Eric",4/20/1999,John Tomlin,16,0,0,2,"classmate, possibly known",4,70.7,54.7
+71,"Klebold, Harris","Dylan, Eric",4/20/1999,Lauren Townsend,18,1,0,2,"classmate, possibly known",4,78.1,60.1
+71,"Klebold, Harris","Dylan, Eric",4/20/1999,Kyle Velasquez,16,0,2,2,"classmate, possibly known",4,70,54
 73,Floyd,Zane,6/3/1999,Thomas Darnell,40,0,0,0,NA,0,74.1,34.1
 73,Floyd,Zane,6/3/1999,"Carlos ""Chuck"" Leos",41,0,2,0,NA,0,66.6,25.6
 73,Floyd,Zane,6/3/1999,Dennis Troy Sargent,29,0,0,0,NA,0,68,39
@@ -658,8 +658,7 @@
 110,Stewart,Robert,3/29/2009,Jesse Musser,88,0,0,0,NA,0,84.7,0
 111,Wong,Jiverly,4/3/2009,Parveen Ali,26,1,4,1,former classmate,4,77.4,51.4
 111,Wong,Jiverly,4/3/2009,Almir O. Alves,43,0,2,1,former classmate,4,67.1,24.1
-111,Wong,Jiverly,4/3/2009,Maria Sonia Bernard,46,1,1,1,"former classmate
-",4,66.3,20.3
+111,Wong,Jiverly,4/3/2009,Maria Sonia Bernard,46,1,1,1,former classmate,4,66.3,20.3
 111,Wong,Jiverly,4/3/2009,Marc Henry Bernard,44,0,1,1,former classmate,4,60,16
 111,Wong,Jiverly,4/3/2009,Li Guo,47,1,3,1,former classmate,4,73.1,26.1
 111,Wong,Jiverly,4/3/2009,Lan Ho,39,1,3,1, former classmate,4,74.7,35.7
@@ -878,31 +877,31 @@
 141,Hudson,William,11/14/2015,Austin Kamp,21,0,0,0,NA,0,73.4,52.4
 141,Hudson,William,11/14/2015,Nathan Kamp,23,0,0,0,NA,0,72.7,49.7
 141,Hudson,William,11/14/2015,Thomas Kamp,45,0,0,0,NA,0,68,23
-"142, 143","Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Robert Adams,40,0,0,1,coworkers,3,69.5,29.5
-"142, 143","Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Isaac Amanios,60,0,1,1,coworkers,3,61.1,1.1
-"142, 143","Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Bennetta Betbadal,46,1,4,1,coworkers,3,74.7,28.7
-"142, 143","Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Harry Bowman,46,0,0,1,coworkers,3,68,22
-"142, 143","Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Sierra Clayborn,27,1,1,1,coworkers,3,73.6,46.6
-"142, 143","Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Juan Espinoza,50,0,2,1,coworkers,3,67.1,17.1
-"142, 143","Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Aurora Luz Godoy,26,1,2,1,coworkers,3,78.8,52.8
-"142, 143","Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Shannon Johnson,45,0,0,1,coworkers,3,68,23
-"142, 143","Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Larry Daniel Kaufman,42,0,0,0,NA,0,69.5,27.5
-"142, 143","Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Damian Meins,58,0,0,1,coworkers,3,67.4,9.4
-"142, 143","Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Tin Nguyen,31,1,3,1,coworkers,3,77.4,46.4
-"142, 143","Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Nicholas Thalasinos,52,0,0,1,coworkers,3,67.4,15.4
-"142, 143","Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Yvette Velasco,27,1,2,1,coworkers,3,78.8,51.8
-"142, 143","Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Michael Raymond Wetzel,37,0,0,1,coworkers,3,70.7,33.7
+142,"Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Robert Adams,40,0,0,1,coworkers,3,69.5,29.5
+142,"Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Isaac Amanios,60,0,1,1,coworkers,3,61.1,1.1
+142,"Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Bennetta Betbadal,46,1,4,1,coworkers,3,74.7,28.7
+142,"Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Harry Bowman,46,0,0,1,coworkers,3,68,22
+142,"Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Sierra Clayborn,27,1,1,1,coworkers,3,73.6,46.6
+142,"Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Juan Espinoza,50,0,2,1,coworkers,3,67.1,17.1
+142,"Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Aurora Luz Godoy,26,1,2,1,coworkers,3,78.8,52.8
+142,"Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Shannon Johnson,45,0,0,1,coworkers,3,68,23
+142,"Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Larry Daniel Kaufman,42,0,0,0,NA,0,69.5,27.5
+142,"Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Damian Meins,58,0,0,1,coworkers,3,67.4,9.4
+142,"Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Tin Nguyen,31,1,3,1,coworkers,3,77.4,46.4
+142,"Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Nicholas Thalasinos,52,0,0,1,coworkers,3,67.4,15.4
+142,"Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Yvette Velasco,27,1,2,1,coworkers,3,78.8,51.8
+142,"Farook, Malik","Syed Rizwan, Tashfeen",12/2/2015,Michael Raymond Wetzel,37,0,0,1,coworkers,3,70.7,33.7
 144,Dalton,Jason,2/20/2016,Dorothy Judy Brown,74,1,0,0,NA,0,85.1,11.1
 144,Dalton,Jason,2/20/2016,Barbara Hawthorne,68,1,0,0,NA,0,85.5,17.5
 144,Dalton,Jason,2/20/2016,Mary Jo Nye,60,1,0,0,NA,0,74.1,14.1
 144,Dalton,Jason,2/20/2016,Mary Lou Nye,62,1,0,0,NA,0,72.2,10.2
 144,Dalton,Jason,2/20/2016,Richard Smith,53,0,0,0,NA,0,66.5,13.5
 144,Dalton,Jason,2/20/2016,Tyler Smith,17,0,0,0,NA,0,74.7,57.7
-"145, 146",,,3/9/2016,Shada Mahone,26,1,1,,,,73.6,47.6
-"145, 146",,,3/9/2016,Brittany Powell,27,1,1,,,,73.6,46.6
-"145, 146",,,3/9/2016,Chanetta Powell,25,1,1,,,,73.6,48.6
-"145, 146",,,3/9/2016,Jerry Shelton,35,0,1,,,,63.8,28.8
-"145, 146",,,3/9/2016,Tina Shelton,37,1,1,,,,63.8,26.8
+145,,,3/9/2016,Shada Mahone,26,1,1,,,,73.6,47.6
+145,,,3/9/2016,Brittany Powell,27,1,1,,,,73.6,46.6
+145,,,3/9/2016,Chanetta Powell,25,1,1,,,,73.6,48.6
+145,,,3/9/2016,Jerry Shelton,35,0,1,,,,63.8,28.8
+145,,,3/9/2016,Tina Shelton,37,1,1,,,,63.8,26.8
 147,Mateen,Omar,6/12/2016,Stanley Almodovar III,23,0,2,0,NA,0,72.5,49.5
 147,Mateen,Omar,6/12/2016,Amanda Alvear,25,1,2,0,NA,0,78.8,53.8
 147,Mateen,Omar,6/12/2016,Oscar A. Aracena-Montero,26,0,2,0,NA,0,71.8,45.8
@@ -1201,10 +1200,10 @@
 171,Ator,Seth,8/31/2019,Joseph Griffith,40,0,0,0,NA,0,70.7,30.7
 171,Ator,Seth,8/31/2019,Leilah Hernandez,15,1,2,0,NA,0,80.1,65.1
 171,Ator,Seth,8/31/2019,Edwin Peregrino,25,0,2,0,NA,0,72.5,47.5
-"172, 173","Anderson, Graham","David, Francine",12/10/2019,Leah Mindel Ferencz,33,1,0,0,NA,0,79.4,46.4
-"172, 173","Anderson, Graham","David, Francine",12/10/2019,Douglas Miguel Rodriguez,49,0,2,0,NA,0,67.1,18.1
-"172, 173","Anderson, Graham","David, Francine",12/10/2019,Moshe Deutsch,24,0,0,0,NA,0,73.4,49.4
-"172, 173","Anderson, Graham","David, Francine",12/10/2019,Joseph Seals,39,0,0,0,NA,0,70.7,31.7
+172,"Anderson, Graham","David, Francine",12/10/2019,Leah Mindel Ferencz,33,1,0,0,NA,0,79.4,46.4
+172,"Anderson, Graham","David, Francine",12/10/2019,Douglas Miguel Rodriguez,49,0,2,0,NA,0,67.1,18.1
+172,"Anderson, Graham","David, Francine",12/10/2019,Moshe Deutsch,24,0,0,0,NA,0,73.4,49.4
+172,"Anderson, Graham","David, Francine",12/10/2019,Joseph Seals,39,0,0,0,NA,0,70.7,31.7
 174,Ferrill,Anthony,2/26/2020,Jesus Valle Jr.,33,0,2,1,coworker,3,71.8,38.8
 174,Ferrill,Anthony,2/26/2020,Gennady Levshetz,61,0,0,1,coworker,3,74.1,13.1
 174,Ferrill,Anthony,2/26/2020,Trevor Wetselaar,33,0,0,1,coworker,3,72.7,39.7
