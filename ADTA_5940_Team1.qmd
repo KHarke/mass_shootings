@@ -305,16 +305,34 @@ Full_Database_weapons
 Now for the victim data.
 
 ```{r}
-victims<-read.csv("victims.csv")
-colnames(victims)[colnames(victims)=="Case.."]<-"B_CaseNum"
-victims$B_CaseNum<-as.integer(victims$B_CaseNum)
-victims$B_CaseNum
+victims <- read.csv("victims.csv")
+colnames(victims)[colnames(victims) == "Case.."] <- "B_CaseNum"
+victims$B_CaseNum <- as.integer(victims$B_CaseNum)
 
 summary_victims <- victims %>%
   group_by(B_CaseNum) %>%
-  summarise(avgAge = mean(Age),
-            avgYrsLost = mean(Years.Lost))
+  summarise(V_avgAge = mean(Age),
+            V_minAge = min(Age),
+            V_avgYrsLost = mean(as.integer(Years.Lost)),
+            V_whitePercentage = sum(Race == 0) / n() * 100,
+            V_whitecount = sum(Race == 0),
+            V_totalcount = n(),
+            V_blackPercentage = sum(Race == 1) / n() * 100,
+            V_malePercentage = sum(Gender == "M") / n() * 100,
+            V_malecount = sum(Gender == "M"),
+            V_femalePercentage = sum(Gender == "F") / n() * 100,
+            V_femalecount = sum(Gender == "F"),
+            V_knewShooterPercentage = sum(Knew.Shooter == 1) / n() * 100,
+            V_knewShootercount = sum(Knew.Shooter == 1))
 summary_victims
+```
+
+Now we'll join the summary of victims to the Full_Database based on case number.
+
+```{r}
+Full_Database<- left_join(Full_Database, summary_victims, by="B_CaseNum")
+str(Full_Database)
+head(Full_Database)
 ```
 
 ### New (Derived) Target Variables
