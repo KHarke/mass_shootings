@@ -19,21 +19,9 @@ The Violence Project, a non-profit, nonpartisan research organization dedicated 
 The Full Database worksheet was extracted from the Excel file and saved as a separate CSV file. There were textual inconsistencies within the database as originally provided, making it difficult to run certain functions. Some modifications were made using Excel, including:
 
 -   Replaced "Case \#" header with "CaseNum" - this makes things easier for matching and referencing the case numbers.
-
-<!-- -->
-
 -   Removed non-standard text from field names, including spaces, dashes, slashes, and parentheses. For some, I replaced with underscores, but not for spaces.
-
-<!-- -->
-
 -   Made the Zipcode field text and added a leading zero to those that needed it (Excel converted these to integers).
-
-<!-- -->
-
 -   Reconciled inconsistent single- and double-quotes in the long-text fields. These were causing the data to be shifted to a new row.
-
-<!-- -->
-
 -   Replaced case \# "145,146" with two rows for each case: 145, 146, duplicating the data. These apparently were one event but two shooters. But there isn't much data about them, so we'll probably drop these cases, anyhow. But at least this way, the file is readable.
 
 To help with the analysis, the field names were modified to include an abbreviation of the category of the variable (based on the codebook) as a prefix. For example, "Age" was changed to "OB_Age", with "OB" abbreviation of "Offender Background" category. Linking these field names to the codebook will also help with identifying factors and other data management tasks. In order to avoid confusion, this version was saved as a separate CSV file, Full_database_VarCatHeaders.csv.
@@ -215,7 +203,121 @@ Full_Database <- Full_Database %>%
 Full_Database
 ```
 
-### New (Derived) Variables
+### Adding Summarized Weapons and Victims Data
+
+While the Full_Database worksheet in the original data set includes a lot of summarized data, like total killed, there are additional fields which would make good features, notably:
+
+-   From Weapons table:
+
+    -   Use of automatic weapon
+
+    -   Use of large caliber weapon
+
+    -   Use of large or extended capacity magazine
+
+    -   Use of legally purchased weapons
+
+-   From Victims table:
+
+    -   Average age
+
+    -   \% Female
+
+    -   \% Non-White
+
+    -   \% Knew Shooter
+
+    -   Avg Years Lost
+
+    -   Sum Years Lost
+
+It should be noted that the Full_Database is organized at the *shooter* level. That is, each row represents an individual shooter, and not a specific shooting event. For 5 events, there were two shooters. In the original database, the **Case \#** for these were set to a delimited list of identifiers (e.g. "141, 142"). This caused problems within R. So, we modified the Case \# for these records, replacing these "dual IDs" with the first of these identifier numbers (e.g. 141).
+
+```{r}
+library(readxl)
+weapons<-read.csv("weapons.csv")
+# rename the case # field to match that in Full_Database
+colnames(weapons)[colnames(weapons)=="Case.."]<-"B_CaseNum"
+weapons$B_CaseNum<-as.integer(weapons$B_CaseNum)
+str(weapons)
+
+
+```
+
+```{r}
+# Factors and labels for weapons$classification: Handgun = 0	Shotgun = 1	Rifle = 2	Assault weapon = 3
+
+summary_UsedClass <- weapons %>%
+  group_by(B_CaseNum, Classification) %>%
+  summarise(
+    NumUsed = sum(Used.in.Shooting.)
+  )
+#Create variable indicating usage of at least 1 AR
+summary_UsedClass$W_AR_Used<-case_when(summary_UsedClass$Classification==3 ~ 1,
+                                     TRUE ~ 0)
+#summarize again on Case #
+summary_ClassUsed<- summary_UsedClass %>%
+  group_by(B_CaseNum) %>%
+  summarise(W_AR_Used=max(W_AR_Used))
+#join with Full_Database
+Full_Database<- left_join(Full_Database, summary_ClassUsed, by="B_CaseNum")
+#Full_Database$W_AR_Used
+
+#Factors in Caliber: Small (e.g., .22, .25, and 7.62 x 39mm) = 0	Medium (e.g., .32, .380, .38, and 9mm) = 1	Large (e.g., .40s, .44, .45, 10mm) = 2
+
+summary_UsedCaliber <- weapons %>%
+  group_by(B_CaseNum, Caliber) %>%
+  summarise(NumUsed=sum(Used.in.Shooting.))
+summary_UsedCaliber$W_LargeCal_Used<-case_when(summary_UsedCaliber$Caliber==2 ~1,
+                                               TRUE ~ 0)
+summary_CaliberUsed<- summary_UsedCaliber %>%
+  group_by(B_CaseNum) %>%
+  summarise(W_LargeCal_Used=max(W_LargeCal_Used))
+Full_Database<- left_join(Full_Database, summary_CaliberUsed, by="B_CaseNum")
+#Full_Database$W_LargeCal_Used
+
+summary_UsedLgMag<- weapons %>%
+  group_by(B_CaseNum, Large.Capacity.Magazine, Extended.Magazine) %>%
+  summarise(NumUsed=sum(Used.in.Shooting.))
+summary_UsedLgMag$W_UsedLgMag<-case_when((summary_UsedLgMag$Large.Capacity.Magazine==1 | summary_UsedLgMag$Extended.Magazine==1) ~ 1,
+                                           TRUE ~ 0)
+summary_LgMag_Used<- summary_UsedLgMag %>%
+  group_by(B_CaseNum) %>%
+  summarise(W_LgMag_Used=max(W_UsedLgMag))
+Full_Database<- left_join(Full_Database, summary_LgMag_Used, by="B_CaseNum")
+
+summary_UsedLegal<- weapons %>%
+  group_by(B_CaseNum, Legal.Purchase) %>%
+  summarise(NumUsed=sum(Used.in.Shooting.))
+summary_UsedLegal$W_Legal<-case_when(summary_UsedLegal$Legal.Purchase==1 ~ 1,
+                                     TRUE ~ 0)
+summary_LegalUsed<- summary_UsedLegal %>%
+  group_by(B_CaseNum) %>%
+  summarise(W_Legal_Used=max(W_Legal))
+Full_Database<-left_join(Full_Database, summary_LegalUsed, by="B_CaseNum")
+
+#selected_columns <- df[, startsWith(names(df), "f")]
+
+Full_Database_weapons<-Full_Database[, startsWith(names(Full_Database), "W_")]
+Full_Database_weapons
+```
+
+Now for the victim data.
+
+```{r}
+victims<-read.csv("victims.csv")
+colnames(victims)[colnames(victims)=="Case.."]<-"B_CaseNum"
+victims$B_CaseNum<-as.integer(victims$B_CaseNum)
+victims$B_CaseNum
+
+summary_victims <- victims %>%
+  group_by(B_CaseNum) %>%
+  summarise(avgAge = mean(Age),
+            avgYrsLost = mean(Years.Lost))
+summary_victims
+```
+
+### New (Derived) Target Variables
 
 While the frequency and number of total victims (injured and killed) has been shown to have increased over time, it could be useful to also measure the fatality rate of each event. This would be useful for city planners, first responders, and hospital administrators for developing plans to deal with these kinds of events.
 
@@ -367,7 +469,7 @@ Full_Database$RC_CriminalSentence<- ordered(Full_Database$RC_CriminalSentence,
 head(Full_Database)
 ```
 
-## EDA of Location Data
+## EDA of Data
 
 The exploratory data analyses we will conduct will be primarily for targeting the features to include in our model. First we need to establish the distribution of each of the columns. For this, we used the library, [DataExplorer](https://cran.r-project.org/web/packages/DataExplorer/index.html) and [GGally](https://cran.r-project.org/web/packages/GGally/index.html). The introduce() function shows the distribution of discrete vs. continuous data, as well as how complete our data is. The results show that nearly 85% of our columns are categorical and that there are few missing data now.
 
@@ -512,8 +614,7 @@ Full_Database<- Full_Database %>%
 head(Full_Database)
 # remove other fields not necessary for analysis, like names and case numbers and addresses
 Full_Database<- Full_Database %>%
-  mutate(B_CaseNum=NULL,
-         B_ShooterLastName=NULL,
+  mutate(B_ShooterLastName=NULL,
          B_ShooterFirstName=NULL,
          D_FullDate=NULL,
          L_StreetNumber=NULL,
@@ -601,6 +702,19 @@ head(Full_Database)
 ```
 
 ### Correlational Analysis
+
+```{r}
+#using DataExplorer's plot_correlation
+library(corrplot)
+library(ggplot2)
+library(ggcorrplot)
+library(RColorBrewer)
+
+
+
+  
+
+```
 
 ## Data Modeling
 
