@@ -8,7 +8,7 @@ editor: visual
 
 Create data prep from correlational analysis.
 
-For the correlation analysis there\'re currently 132 columns. We can deploy several methods to help with the analysis be more efficient and feature selection for future machine learning models.
+For the correlation analysis there're currently 132 columns. We can deploy several methods to help with the analysis be more efficient and feature selection for future machine learning models.
 
 Domain Knowledge: We can delete any columns that we know won't be useful for your research.
 
@@ -19,6 +19,8 @@ Variance Threshold: We can remove columns where most of the rows have the same v
 Correlation: Wecan delete strongly correlated columns, as a result, our dataset will have less redundancy.
 
 Model Feature Importance: Features that the model deems unnecessary can be deleted.
+
+## Read the data / Import the Data
 
 ```{r}
 
@@ -43,7 +45,9 @@ head(Full_Database)
 # Remove columns
 columns_to_remove <- c("B_ShooterLastName", "B_ShooterFirstName", "D_FullDate", 
 "D_DayofWeek", "D_Day", "D_Month", "D_Year", "L_StreetNumber", "L_StreetName", "L_City",
-"L_County", "L_ZipCode", "L_Latitude", "L_Longitude", "L_StateCode", "L_Region",
+"L_County", "L_ZipCode", "L_Latitude", "L_Longitude"
+, "L_StateCode"
+, "L_Region",
 "L_Location","L_InsiderorOutsider","L_WorkplaceShooting","L_MultipleLocations","L_OtherLocation","L_ArmedPersononScene","L_SpecifyArmedPerson",
 "OB_Age", "OB_Gender", "OB_Race", "OB_Height", "OB_Weight", "OB_Immigrant",
 "OB_SexualOrientation", "OB_Religion", "OB_Education", "OB_SchoolPerformance",
@@ -68,11 +72,22 @@ columns_to_remove <- c("B_ShooterLastName", "B_ShooterFirstName", "D_FullDate",
 "HMH_VoluntaryorMandatoryCounseling", "HMH_PsychiatricMedication", "HMH_PsychiatricMedicationSpecified",
 "HMH_MedicationCategory", "HMH_Treatment6MonthsPriortoShooting", "HMH_MentalIllness",
 "HMH_FASD_FetalAlcoholSpectrumDisorder", "HMH_KnownFamilyMentalHealthHistory", "HMH_AutismSpectrum",
-"HMH_SubstanceUse", "HMH_HealthIssues", "HMH_HealthIssues_Specify", "HMH_HeadInjury_PossibleTBI",
-"GM_KnownPrejudices", "GM_Motive_Racism_Xenophobia", "GM_Motive_ReligiousHate", "GM_Motive_Misogyny",
-"GM_Motive_Homophobia", "GM_Motive_EmploymentIssue", "GM_Motive_EconomicIssue", "GM_Motive_LegalIssue",
-"GM_Motive_RelationshipIssue", "GM_Motive_InterpersonalConflict", "GM_Motive_Fame_Seeking", "GM_Motive_Other",
-"GM_Motive_Unknown", "GM_RoleofPsychosisintheShooting", "SOC_SocialMediaUse", "SOC_Leakage",
+"HMH_SubstanceUse", "HMH_HealthIssues", "HMH_HealthIssues_Specify", "HMH_HeadInjury_PossibleTBI"
+#,"GM_KnownPrejudices"
+#,"GM_Motive_Racism_Xenophobia"
+#, "GM_Motive_ReligiousHate"
+, "GM_Motive_Misogyny"
+,"GM_Motive_Homophobia"
+, "GM_Motive_EmploymentIssue"
+, "GM_Motive_EconomicIssue"
+, "GM_Motive_LegalIssue"
+,"GM_Motive_RelationshipIssue"
+, "GM_Motive_InterpersonalConflict"
+, "GM_Motive_Fame_Seeking"
+, "GM_Motive_Other"
+,"GM_Motive_Unknown"
+, "GM_RoleofPsychosisintheShooting"
+, "SOC_SocialMediaUse", "SOC_Leakage",
 "SOC_LeakageHow", "SOC_LeakageWho", "SOC_LeakageSpecific_Nonspecific", "SOC_InterestinPastMassViolence",
 "SOC_RelationshipwithOtherShootings", "SOC_SpecifyRelationshiptoOtherShootings", "SOC_LegacyToken",
 "SOC_PopCultureConnection", "SOC_SpecifyPopCultureConnection", "SOC_Planning", "SOC_Performance",
@@ -82,6 +97,7 @@ columns_to_remove <- c("B_ShooterLastName", "B_ShooterFirstName", "D_FullDate",
 
 Full_Database <- Full_Database %>% select(-one_of(columns_to_remove))
 
+print(columns_to_remove)
 ```
 
 ```{r}
@@ -91,7 +107,7 @@ Full_Database <- Full_Database %>% select(-one_of(columns_to_remove))
 Missing_values_cols_to_remove <- colnames(Full_Database)[colMeans(is.na(Full_Database)) > 0.5]
 Full_Database <- Full_Database %>% select(-one_of(Missing_values_cols_to_remove))
 
-
+print(Missing_values_cols_to_remove)
 ```
 
 ```{r}
@@ -102,7 +118,9 @@ numeric_vars <- Full_Database %>% select_if(is.numeric)
 low_variance_cols <- names(numeric_vars)[sapply(numeric_vars, var, na.rm = TRUE) < 0.1]
 Full_Database <- Full_Database %>% select(-one_of(low_variance_cols))
 
+print(low_variance_cols)
 
+#results show low variance for V_FamilyMemberVictim.
 ```
 
 ```{r}
@@ -111,20 +129,29 @@ Full_Database <- Full_Database %>% select(-one_of(low_variance_cols))
 # Step 1: Identify numeric variables, because correlation can only be calculated for numeric variables
 numeric_vars <- Full_Database %>% select_if(is.numeric)
 
+print(numeric_vars)# this provides
+
 # Step 2: Compute correlation matrix
 correlation_matrix <- cor(numeric_vars, use = "complete.obs")  # only compute for complete observations
+
+#print(correlation_matrix)
 
 # Step 3: Visualize the correlation matrix
 # Before running this, ensure corrplot package is installed. If not, install it using: install.packages('corrplot')
 corrplot(correlation_matrix, method = "color", addCoef.col = "black")
+
 # Step 4: Identify highly correlated variables
 
 highly_correlated <- findCorrelation(correlation_matrix, cutoff = 0.7)  # here 0.7 is the absolute correlation coefficient above which variables are considered highly correlated
 
+#print(highly_correlated)
+
 highly_correlated_vars <- colnames(numeric_vars)[highly_correlated]
 
-highly_correlated <- findCorrelation(correlation_matrix, cutoff = 0.7)
-highly_correlated_vars <- colnames(numeric_vars)[highly_correlated]
+#print(highly_correlated_vars)
+
+##highly_correlated <- findCorrelation(correlation_matrix, cutoff = 0.7)
+##highly_correlated_vars <- colnames(numeric_vars)[highly_correlated]
 
 #print(highly_correlated)
 
@@ -135,6 +162,7 @@ corrplot(correlation_matrix, method = "color", addCoef.col = "black")
 # Step 5: Remove one of the pair of highly correlated variables from your data
 selected_features <- Full_Database %>% select(-one_of(highly_correlated_vars))
 
+#print(highly_correlated_vars)
 # Now selected_features dataset contains your selected features for further analysis
 
 Full_Database <- Full_Database %>% select(-one_of(highly_correlated_vars))
@@ -151,25 +179,3 @@ Full_Database <- Full_Database %>% select(-one_of(highly_correlated_vars))
 
 head(Full_Database)
 ```
-
-## Data Modeling
-
-```{r}
-
-```
-
-## Cluster Analysis
-
-```{r}
-
-```
-
-## Boot strapping
-
-```{r}
-
-```
-
-## Data Reporting & Communication Results
-
-## 
