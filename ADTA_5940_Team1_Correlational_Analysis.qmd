@@ -73,9 +73,9 @@ columns_to_remove <- c("B_ShooterLastName", "B_ShooterFirstName", "D_FullDate",
 "HMH_MedicationCategory", "HMH_Treatment6MonthsPriortoShooting", "HMH_MentalIllness",
 "HMH_FASD_FetalAlcoholSpectrumDisorder", "HMH_KnownFamilyMentalHealthHistory", "HMH_AutismSpectrum",
 "HMH_SubstanceUse", "HMH_HealthIssues", "HMH_HealthIssues_Specify", "HMH_HeadInjury_PossibleTBI"
-#,"GM_KnownPrejudices"
-#,"GM_Motive_Racism_Xenophobia"
-#, "GM_Motive_ReligiousHate"
+,"GM_KnownPrejudices"
+,"GM_Motive_Racism_Xenophobia"
+, "GM_Motive_ReligiousHate"
 , "GM_Motive_Misogyny"
 ,"GM_Motive_Homophobia"
 , "GM_Motive_EmploymentIssue"
