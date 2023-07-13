@@ -16,7 +16,7 @@ Missing Values: We can remove columns with a large number of missing values.
 
 Variance Threshold: We can remove columns where most of the rows have the same values
 
-Correlation: Wecan delete strongly correlated columns, as a result, our dataset will have less redundancy.
+Correlation: We can delete strongly correlated columns, as a result, our dataset will have less redundancy.
 
 Model Feature Importance: Features that the model deems unnecessary can be deleted.
 
