@@ -1,0 +1,117 @@
+---
+title:  "Principal  Component Analysis of TVP Mass Shooter Database" 
+author: "Tochi Agbara, Karen Harker, Kevin Brown" 
+editor: visual ---
+---
+
+## Principal  Component Analysis
+
+In order to do Principal Component Analysis (PCA) and display the findings, this code begins by importing the required packages, such as dplyr, factoextra, and ggplot2.
+
+Next, we select the numeric variables from your data set that will be used for the PCA analysis.
+
+We then proceed to perform PCA using the prcomp() function, with the scale. = TRUE argument used to scale the variables to have unit variance.
+
+After performing PCA, we extract important results such as the principal component scores and the variance explained by each component.
+
+To gain insights from the PCA results, we generate a scree plot (fviz_eig()) to visualize the variance explained by each principal component, and a biplot (fviz_pca_var()) to visualize the relationship between variables and principal components.
+
+## Read the data / Import the Data / Load Libraries
+
+```{r}
+
+# Load required packages
+library(dplyr)
+library(factoextra)
+library(ggplot2)
+
+
+Full_Database<-read.csv("Full_database_VarCatHeaders.csv", header=TRUE)  
+
+head(Full_Database)
+```
+
+## Prep the Data
+
+```{r}
+# Prepare the data
+# Assuming your data is stored in a data frame called 'data'
+# Select the numeric variables for PCA analysis
+numeric_vars <- select_if(Full_Database, is.numeric)
+
+
+# Handle missing and infinite values
+for (i in seq_along(numeric_vars)) {
+  var <- numeric_vars[[i]]
+  var[!is.finite(var)] <- 0  # Replace infinite values with 0 or appropriate values
+  numeric_vars[[i]] <- var
+}
+
+```
+
+## Perform PCA
+
+```{r}
+# Step 2: Perform PCA
+pca_result <- prcomp(numeric_vars, scale. = TRUE)  # scale. = TRUE to standardize variables
+
+```
+
+## Extract PCA results 
+
+```{r}
+
+pca_data <- as.data.frame(pca_result$x)  # Extract principal component scores
+pca_variance <- pca_result$sdev^2  # Extract variance explained by each principal component
+
+
+```
+
+## Explore PCA results
+
+```{r}
+
+# Scree plot to visualize the variance explained by each principal component
+fviz_eig(pca_result, addlabels = TRUE, ylim = c(0, 50))
+
+
+```
+
+```{r}
+# Biplot to visualize the relationship between variables and principal components
+fviz_pca_var(pca_result, col.var = "contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE)
+
+```
+
+## Select components for analysis
+
+```{r}
+
+# Step 6: Select components for analysis
+# Choose the number of components to retain based on the scree plot and cumulative variance
+num_components <- 3  # Select the desired number of components to retain
+
+
+```
+
+```{r}
+
+# Select the top components from the PCA data
+selected_components <- pca_data[, 1:num_components]
+```
+
+```{r}
+
+# Visualize the data using the selected components
+ggplot(selected_components, aes(x = PC1, y = PC2)) +
+  geom_point()  # Replace PC1 and PC2 with the desired components
+
+```
+
+```{r}
+
+# Optional: Retrieve variable loadings to interpret the relationship between variables and components
+variable_loadings <- as.data.frame(pca_result$rotation[, 1:num_components])
+variable_loadings
+```

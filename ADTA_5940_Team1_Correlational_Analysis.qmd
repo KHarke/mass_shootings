@@ -179,3 +179,77 @@ Full_Database <- Full_Database %>% select(-one_of(highly_correlated_vars))
 
 head(Full_Database)
 ```
+
+```{r}
+
+library(Hmisc)
+library(psych)
+library(corrgram)
+library(GPArotation)
+library(corrplot)
+
+# Step 1: Identify numeric variables
+numeric_vars <- Full_Database %>% select_if(is.numeric)
+
+# Step 2: Compute correlation matrices using different methods
+cor_matrix_pearson <- cor(numeric_vars, use = "complete.obs", method = "pearson")
+cor_matrix_spearman <- cor(numeric_vars, use = "complete.obs", method = "spearman")
+cor_matrix_kendall <- cor(numeric_vars, use = "complete.obs", method = "kendall")
+
+# Step 3: Visualize the correlation matrices
+corrplot(cor_matrix_pearson, method = "color", addCoef.col = "black", title = "Pearson Correlation")
+corrplot(cor_matrix_spearman, method = "color", addCoef.col = "black", title = "Spearman Correlation")
+corrplot(cor_matrix_kendall, method = "color", addCoef.col = "black", title = "Kendall Correlation")
+
+# Step 4: Identify highly correlated variables
+highly_correlated_pearson <- findCorrelation(cor_matrix_pearson, cutoff = 0.7)
+highly_correlated_vars_pearson <- colnames(numeric_vars)[highly_correlated_pearson]
+
+highly_correlated_spearman <- findCorrelation(cor_matrix_spearman, cutoff = 0.7)
+highly_correlated_vars_spearman <- colnames(numeric_vars)[highly_correlated_spearman]
+
+highly_correlated_kendall <- findCorrelation(cor_matrix_kendall, cutoff = 0.7)
+highly_correlated_vars_kendall <- colnames(numeric_vars)[highly_correlated_kendall]
+
+# Step 5: Remove one of the pair of highly correlated variables from your data
+selected_features <- Full_Database %>% select(-one_of(
+  highly_correlated_vars_pearson,
+  highly_correlated_vars_spearman,
+  highly_correlated_vars_kendall
+))
+
+# Now 'selected_features' dataset contains your selected features for further analysis
+Full_Database <- selected_features
+
+```
+
+```{r}
+str(Full_Database)
+
+library(corrr)
+library(corrplot)
+library(dplyr)
+
+# Step 1: Convert character variables to factors
+character_vars <- Full_Database %>% select_if(is.character)
+Full_Database <- Full_Database %>% mutate(across(all_of(names(character_vars)), as.factor))
+
+# Step 2: Identify numeric variables
+numeric_vars <- Full_Database %>% select_if(is.numeric)
+
+# Step 3: Compute correlation matrix
+correlation_matrix <- correlate(numeric_vars, use = "pairwise.complete.obs")
+
+# Step 4: Visualize the correlation matrix
+corrplot(correlation_matrix, method = "color", addCoef.col = "black")
+
+# Step 5: Identify highly correlated variables
+highly_correlated <- correlate_select(correlation_matrix, threshold = 0.7, method = "pearson")$colname
+
+# Step 6: Remove highly correlated variables from your data
+selected_features <- Full_Database %>% select(-one_of(highly_correlated))
+Full_Database <- selected_features
+
+
+
+```
